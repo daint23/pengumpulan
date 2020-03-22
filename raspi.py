@@ -26,10 +26,9 @@ def on_message(mosq, obj, msg):
         os.makedirs(dir)
         
     fileku = open(dir+"{:s}-{:s}-{:s}.txt".format(lastMonth, lastDay, lastHour), 'a+')
-    fileku.write(json_string)
     fileku.write("\n")
     fileku.close
-    
+
 def saveJsonIntoFile(json_string):
     now = datetime.datetime.now()
     lastMonth = str(now.month)
