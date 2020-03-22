@@ -21,6 +21,15 @@ def on_message(mosq, obj, msg):
     except:
         return "id={},{}={},suhu={},tekan={},timestamp={}".format(delimiter[0], topic, delimiter[1], delimiter[2], delimiter[3], delimiter[4])
     
+    dir = "/home/pi/data/{:s}/{:s}/".format(lastMonth, lastDay)
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+        
+    fileku = open(dir+"{:s}-{:s}-{:s}.txt".format(lastMonth, lastDay, lastHour), 'a+')
+    fileku.write(json_string)
+    fileku.write("\n")
+    fileku.close
+    
 def saveJsonIntoFile(json_string):
     now = datetime.datetime.now()
     lastMonth = str(now.month)
